@@ -17,10 +17,12 @@ public class BotVsHumanGame {
 	Player player2;
 	Match match;
 	TerminalConsole terminal;
+	int matchesPlayed;
 	public BotVsHumanGame() {
 		player1 = new BotPlayer("TAR's"); 
 		player2 = new Player("You");
 		terminal = new TerminalConsole();
+		matchesPlayed = 1;
 	}
 	
 	public void startGame(){
@@ -29,17 +31,17 @@ public class BotVsHumanGame {
 		
 		Game game = new Game(this.player1, this.player2);
 		
-		startRound(game); // at least one round always
+		startMatch(game); // at least one round always
 		while(terminal.askForInitNewRound()){
-		
-			startRound(game);
+			this.matchesPlayed++;
+			startMatch(game);
 		}
 		
 		terminal.printGameStats(game);
 	}
 	
-	public void startRound(Game game){
-		
+	public void startMatch(Game game){
+		terminal.printMatchNumber(this.matchesPlayed);
 		terminal.askNUmberOfRounds();
 		this.matchesToPlayAtThisRound = terminal.getNumberOfRounds();
 		
@@ -74,7 +76,7 @@ public class BotVsHumanGame {
 	}
 
 	private void processFinishedRound(Game game , Match match) {
-		terminal.printRoundStats(match);
+		terminal.printMatchStats(match);
 		
 		game.saveMatch(match);
 		

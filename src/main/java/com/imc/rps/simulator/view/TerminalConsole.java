@@ -111,14 +111,14 @@ public class TerminalConsole {
 		
 	}
 
-	public void printRoundStats(Match round) {
+	public void printMatchStats(Match match) {
 		ConsoleHelper.logResult("");
-		ConsoleHelper.logResult(">>>>>>> ROUND RESULTS <<<<<<<<");
+		ConsoleHelper.logResult(">>>>>>> Match RESULTS <<<<<<<<");
 		ConsoleHelper.logResult("Scores " 
-								+ round.getPlayer1().getDisplayName() 
-								+ " : " + round.getWinsPlayer1() + "  " 
-								+ round.getPlayer2().getDisplayName() + " : "
-								+ round.getWinsPlayer2());
+								+ match.getPlayer1().getDisplayName() 
+								+ " : " + match.getWinsPlayer1() + "  " 
+								+ match.getPlayer2().getDisplayName() + " : "
+								+ match.getWinsPlayer2());
 	}
 	public void printGameStats(Game game) {
 		ConsoleHelper.logResult(">>>>>>> GAME STATS <<<<<<<<");
@@ -139,5 +139,10 @@ public class TerminalConsole {
 	}
 	public void cleanConsole(){
 		ConsoleHelper.clearConsole();
+	}
+
+	public void printMatchNumber(int matchSequence) {
+		ConsoleHelper.printLog("PLaying Match: " + matchSequence);
+		
 	}
 }
