@@ -15,14 +15,10 @@ import org.powermock.reflect.Whitebox;
 import com.imc.rps.simulator.model.Gesture;
 import com.imc.rps.simulator.view.TerminalConsole;
 
-/**
- * @author rodrigomartins
- *
- */
 public class TerminalConsoleTeste {
 
 	@Test
-	public void test_setHumanGesture_getHumanGesture() throws Exception {
+	public void shouldHumanGesture_getHumanGesture() throws Exception {
 		TerminalConsole terminal = new TerminalConsole();
 		Whitebox.invokeMethod(terminal, "setHumanGesture", 1);
 		
@@ -31,7 +27,7 @@ public class TerminalConsoleTeste {
 		assertEquals(actual	, expected);
 	}
 	@Test
-	public void test_verifyIsHumanGestureIndexIsvalid() throws Exception{
+	public void shouldVerifyIsHumanGestureIndexIsvalid() throws Exception{
 		TerminalConsole terminal = new TerminalConsole();
 		ByteArrayInputStream in = new ByteArrayInputStream("30".getBytes());
 		Scanner keyboard = new Scanner(in);
