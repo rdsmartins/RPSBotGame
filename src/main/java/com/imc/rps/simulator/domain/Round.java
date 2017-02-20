@@ -1,70 +1,49 @@
 package com.imc.rps.simulator.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.imc.rps.simulator.model.Gesture;
 import com.imc.rps.simulator.model.Result;
 
 public class Round {
+	private Referee referee = new Referee();
+	private Result result;
+
+	String winnerName;
 	
-	private List<Result> listOfMatchsResults = new ArrayList<Result>();
-	private Player player2;
-	private Player player1;
+	Gesture player1Gesture;
+	Gesture player2Gesture;
 	
-	public Player getPlayer2() {
-		return player2;
+	public Gesture getPlayer1Gesture() {
+		return player1Gesture;
 	}
 
-	public Player getPlayer1() {
-		return player1;
+	public Gesture getPlayer2Gesture() {
+		return player2Gesture;
 	}
 
-	public Round(Player player1, Player player2) {
-		this.player1 = player1;
-		this.player2 = player2;
-	}
-	
-	public Round() {
+
+	public Result play(Player player1, Player player2 ) {
+		this.player1Gesture = player1.getGesture();
+		this.player2Gesture = player2.getGesture();
+		this.result = referee.judge(player1Gesture, player2Gesture);
+
+		if(this.result == Result.PLAYER1) winnerName =  player1.getDisplayName();
+		else if(this.result == Result.PLAYER2) winnerName = player2.getDisplayName();
 		
+		return this.result;
+	}
+
+	public Result getResult(){
+		return this.result;
 	}
 	
-	
-	public void addMatchResult(Result result){
+	public Boolean hasAWinner(){
+		if(this.result != Result.DRAW) return true;
 		
-		this.listOfMatchsResults.add(result);
+		return false;
 	}
 	
-	public List<Result> getMatchResults(){
-		return this.listOfMatchsResults;
+	public String getWinnerName(){
+		return this.winnerName;
 	}
-	
-	public int getNumberOfRounds(){
-		return this.listOfMatchsResults.size();
-	}
-	
-	
-	
-	public int getWinsPlayer1(){
-		return (int) this.listOfMatchsResults.stream().filter( r -> r == Result.PLAYER1).count();
-	}
-	
-	public int getWinsPlayer2(){
-		return (int) this.listOfMatchsResults.stream().filter( r -> r == Result.PLAYER2).count();
-	}
-	
-	public int getDRAWsCount(){
-		return (int) this.listOfMatchsResults.stream().filter( r -> r == Result.DRAW).count();
-	}
-	
-	public Player getRoundWinner(){
-		if(this.getWinsPlayer1() > this.getWinsPlayer2()){
-			return this.player1;
-		}else{
-			return this.player2;
-		}
-	}
-
-	
-
 	
 }

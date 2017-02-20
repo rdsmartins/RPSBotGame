@@ -7,7 +7,7 @@ public class Game {
 	
 	private Player player1;
 	private Player player2;
-	private List<Round> listOfFinisedRounds = new ArrayList<Round>();
+	private List<Match> listOfFinisedMatches = new ArrayList<Match>();
 	
 	public Game() {
 		// assume botPlayer
@@ -39,18 +39,18 @@ public class Game {
 		this.player2 = player2;
 	}
 
-	public void saveRound(Round round) {
-		this.listOfFinisedRounds.add(round);
+	public void saveMatch(Match match) {
+		this.listOfFinisedMatches.add(match);
 		
 	}
 	
-	public List<Round> getFinishedRounds(){
-		return this.listOfFinisedRounds;
+	public List<Match> getFinishedMatches(){
+		return this.listOfFinisedMatches;
 	}
 	
 	public int getWinsPlayer1(){
 		int count = 0;
-		for (Round round : this.listOfFinisedRounds) {
+		for (Match round : this.listOfFinisedMatches) {
 			count += round.getWinsPlayer1();
 		}
 		return count;
@@ -59,7 +59,7 @@ public class Game {
 	
 	public int getWinsPlayer2(){
 		int count = 0;
-		for (Round round : this.listOfFinisedRounds) {
+		for (Match round : this.listOfFinisedMatches) {
 			count += round.getWinsPlayer2();
 		}
 		return count;
@@ -68,7 +68,7 @@ public class Game {
 	
 	public int getDRAWsCount(){
 		int count = 0;
-		for (Round round : this.listOfFinisedRounds) {
+		for (Match round : this.listOfFinisedMatches) {
 			count += round.getDRAWsCount();
 		}
 		return count;
@@ -77,14 +77,14 @@ public class Game {
 	
 	public int getNumberOfMatches(){ // just Valid
 		int count = 0;
-		for (Round round : listOfFinisedRounds) {
-			count += round.getMatchResults().size();
+		for (Match match : listOfFinisedMatches) {
+			count += match.getMatchResults().size();
 		}
 		return count;
 	}
 	
 	public boolean hasAWinner(){
-		if(this.listOfFinisedRounds.size() == 0) throw new RuntimeException("There is no Rounds at the Game.");
+		if(this.listOfFinisedMatches.size() == 0) throw new RuntimeException("There is no Rounds at the Game.");
 		if(this.getGameWinner() != null){
 			return true;
 		}

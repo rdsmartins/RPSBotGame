@@ -26,15 +26,17 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>     <!-- NOT org.junit here -->
+			<groupId>junit</groupId>    
 			<artifactId>junit-dep</artifactId>
 			<version>4.8.2</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.powermock/powermock-reflect -->
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-reflect</artifactId>
 			<version>1.6.1</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

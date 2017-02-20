@@ -10,38 +10,49 @@ import com.imc.rps.simulator.model.Result;
 public class RoundTest {
 
 	@Test
-	public void shouldHaveTreeMatchesPlayed() {
+	public void shouldBeThePlayer1TheWinner() {
 		Player player1 = new Player("P1");
 		Player player2 = new Player("P2");
-		Game game = new Game(player1, player2);
-		Round round = new Round(game.getPlayer1(), game.getPlayer2());
+
+		// 1
+		player1.setGesture(Gesture.SCISSORS);
+		player2.setGesture(Gesture.PAPER);
+		Round round = new Round();
+		Result result = round.play(player1, player2);
+
+		assertEquals(result, Result.PLAYER1);
+
+	}
+
+	@Test
+	public void shouldBeThePLayer2TheWinner() {
+		Player player1 = new Player("P1");
+		Player player2 = new Player("P2");
+
 		// 1
 		player1.setGesture(Gesture.ROCK);
 		player2.setGesture(Gesture.PAPER);
 
-		Match match = new Match();
-		Result result = match.play(player1, player2);
-		round.addMatchResult(result);
+		Round round = new Round();
+		Result result = round.play(player1, player2);
 
-		// 2
-		player1.setGesture(Gesture.ROCK);
-		player2.setGesture(Gesture.PAPER);
-
-		match = new Match();
-		result = match.play(player1, player2);
-		round.addMatchResult(result);
-
-		// 3
-		player1.setGesture(Gesture.ROCK);
-		player2.setGesture(Gesture.PAPER);
-
-		match = new Match();
-		result = match.play(player1, player2);
-		round.addMatchResult(result);
-		
-		int actual = round.getMatchResults().size();
-		int expected = 3; 
-		assertEquals(expected, actual);
+		assertEquals(result, Result.PLAYER2);
 	}
+
+	@Test
+	public void shouldBeDRAW() {
+		Player player1 = new Player("P1");
+		Player player2 = new Player("P2");
+
+		// 1
+		player1.setGesture(Gesture.PAPER);
+		player2.setGesture(Gesture.PAPER);
+
+		Round round = new Round();
+		Result result = round.play(player1, player2);
+
+		assertEquals(result, Result.DRAW);
+	}
+
 
 }

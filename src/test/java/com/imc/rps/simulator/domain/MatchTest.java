@@ -10,47 +10,72 @@ import com.imc.rps.simulator.model.Result;
 public class MatchTest {
 
 	@Test
-	public void shouldBeThePlayer1TheWinner() {
+	public void shouldHaveTreeMatchesPlayed() {
 		Player player1 = new Player("P1");
 		Player player2 = new Player("P2");
-		
-		// 1
-		player1.setGesture(Gesture.SCISSORS);
-		player2.setGesture(Gesture.PAPER);
-		Match match = new Match();
-		Result result = match.play(player1, player2);
-		
-		assertEquals(result, Result.PLAYER1);
-		
-	}
-	@Test
-	public void shouldBeThePLayer2TheWinner(){
-		Player player1 = new Player("P1");
-		Player player2 = new Player("P2");
-		
+		Game game = new Game(player1, player2);
+		Match match = new Match(game.getPlayer1(), game.getPlayer2());
 		// 1
 		player1.setGesture(Gesture.ROCK);
 		player2.setGesture(Gesture.PAPER);
-		
-		Match match = new Match();
-		Result result = match.play(player1, player2);
-		
-		assertEquals(result, Result.PLAYER2);
-	}
 
+		Round round = new Round();
+		Result result = round.play(player1, player2);
+		match.addMatchResult(result);
+
+		// 2
+		player1.setGesture(Gesture.ROCK);
+		player2.setGesture(Gesture.PAPER);
+
+		round = new Round();
+		result = round.play(player1, player2);
+		match.addMatchResult(result);
+
+		// 3
+		player1.setGesture(Gesture.ROCK);
+		player2.setGesture(Gesture.PAPER);
+
+		round = new Round();
+		result = round.play(player1, player2);
+		match.addMatchResult(result);
+		
+		int actual = match.getMatchResults().size();
+		int expected = 3; 
+		assertEquals(expected, actual);
+	}
+	
 	@Test
-	public void shouldBeDRAW(){
+	public void shouldHaveBestOfResultAndShouldBePlayer2() {
 		Player player1 = new Player("P1");
 		Player player2 = new Player("P2");
-		
-		
+		Game game = new Game(player1, player2);
+		Match match = new Match(game.getPlayer1(), game.getPlayer2(), 3);
 		// 1
-		player1.setGesture(Gesture.PAPER);
+		player1.setGesture(Gesture.ROCK);
 		player2.setGesture(Gesture.PAPER);
+
+		Round round = new Round();
+		Result result = round.play(player1, player2);
+		match.addMatchResult(result);
+
+		// 2
+		player1.setGesture(Gesture.ROCK);
+		player2.setGesture(Gesture.PAPER);
+
+		round = new Round();
+		result = round.play(player1, player2);
+		match.addMatchResult(result);
+
 		
-		Match match = new Match();
-		Result result = match.play(player1, player2);
 		
-		assertEquals(result, Result.DRAW);
+		boolean actual = match.hasRoundAWinner();
+		boolean expected = true; 
+		
+		Player actual2 = match.getRoundWinner();
+		Player expected2 = player2;
+		
+		assertEquals(expected, actual);
+		assertEquals(expected2, actual2);
 	}
+
 }

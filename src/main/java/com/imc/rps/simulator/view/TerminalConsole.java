@@ -4,6 +4,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.imc.rps.simulator.domain.Game;
+import com.imc.rps.simulator.domain.Match;
+import com.imc.rps.simulator.domain.RULES;
 import com.imc.rps.simulator.model.Gesture;
 import com.imc.rps.simulator.util.ConsoleHelper;
 
@@ -11,11 +13,11 @@ public class TerminalConsole {
 	private Scanner sc ;
 	private Gesture selectedHumanGesture;
 	private int selectedNumberOfRounds;
-	public void askGestureFromHuman(int matchSequency) {
+	public void askGestureFromHuman(int roundsPlayed) {
 		boolean answareIsnotValid = true;
 		
 		while (answareIsnotValid){
-			ConsoleHelper.printQuestion("MATCH: " + matchSequency + " - Enter 1 -> Rock / 2 -> Paper / 3 -> Scissors: ");
+			ConsoleHelper.printQuestion("ROUND: " + roundsPlayed + " - Enter 1 -> Rock / 2 -> Paper / 3 -> Scissors: ");
 			Scanner input = new Scanner(System.in);
 			
 			if(verifyIsHumanGestureIndexIsvalid(input )){
@@ -30,7 +32,7 @@ public class TerminalConsole {
 	public void askNUmberOfRounds(){
 		boolean answareIsnotValid = true;
 		while (answareIsnotValid){
-			ConsoleHelper.printQuestion("Please enter the number of Match(es) you want to play: ");
+			ConsoleHelper.printQuestion("Please enter the number of Round(s) you want to play: ");
 			Scanner input = new Scanner(System.in);
 			
 			if(verifyNUmberOfRoundsIsValid(input )){
@@ -45,7 +47,7 @@ public class TerminalConsole {
 		try {
 			int choice = input.nextInt();
 
-			if (choice < 1 || choice > 20)
+			if (choice < RULES.MIN_ROUNDS || choice > RULES.MAX_ROUNDS)
 				return false;
 			else 
 				this.selectedNumberOfRounds =choice ;
@@ -109,9 +111,18 @@ public class TerminalConsole {
 		
 	}
 
+	public void printRoundStats(Match round) {
+		ConsoleHelper.logResult("");
+		ConsoleHelper.logResult(">>>>>>> ROUND RESULTS <<<<<<<<");
+		ConsoleHelper.logResult("Scores " 
+								+ round.getPlayer1().getDisplayName() 
+								+ " : " + round.getWinsPlayer1() + "  " 
+								+ round.getPlayer2().getDisplayName() + " : "
+								+ round.getWinsPlayer2());
+	}
 	public void printGameStats(Game game) {
 		ConsoleHelper.logResult(">>>>>>> GAME STATS <<<<<<<<");
-		ConsoleHelper.logResult("Number of Rounds: " + game.getFinishedRounds().size());
+		ConsoleHelper.logResult("Number of Rounds: " + game.getFinishedMatches().size());
 		ConsoleHelper.logResult("Number of Matches: " + game.getNumberOfMatches()); // just Valid
 		ConsoleHelper.logResult(game.getPlayer1().getDisplayName() + " Score: " + game.getWinsPlayer1() );
 		ConsoleHelper.logResult(game.getPlayer2().getDisplayName() + " Score: " + game.getWinsPlayer2() );
