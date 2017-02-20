@@ -6,8 +6,8 @@ public class App {
 	public static void main(String[] args)  {
 		
 
-		BotVsHumanGame terminal = new BotVsHumanGame();
-		terminal.startGame();
+		BotVsHumanGame game = new BotVsHumanGame();
+		game.startGame();
 		
 	}
 
