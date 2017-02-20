@@ -15,6 +15,7 @@ This game follow some logical principals:
 # How to Compile and Run
 *The Project **requires** Java 1.8*
 ```sh
+$ git clone https://github.com/rdsmartins/RPSBotGame.git
 $ cd <project_folder>
 $ mvn clean package
 $ java -jar <project_folder>/target/RPSSimulator-0.0.1-SNAPSHOT.jar
