@@ -5,6 +5,7 @@ import com.imc.rps.simulator.model.Result;
 
 public class Round {
 	private Referee referee = new Referee();
+	
 	private Result result;
 
 	String winnerName;
@@ -24,7 +25,7 @@ public class Round {
 	public Result play(Player player1, Player player2 ) {
 		this.player1Gesture = player1.getGesture();
 		this.player2Gesture = player2.getGesture();
-		this.result = referee.judge(player1Gesture, player2Gesture);
+		this.result = referee.judge(this.player1Gesture, this.player2Gesture);
 
 		if(this.result == Result.PLAYER1) winnerName =  player1.getDisplayName();
 		else if(this.result == Result.PLAYER2) winnerName = player2.getDisplayName();

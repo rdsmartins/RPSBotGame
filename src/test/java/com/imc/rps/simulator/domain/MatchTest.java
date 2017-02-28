@@ -49,7 +49,7 @@ public class MatchTest {
 		Player player1 = new Player("P1");
 		Player player2 = new Player("P2");
 		Game game = new Game(player1, player2);
-		Match match = new Match(game.getPlayer1(), game.getPlayer2(), 3);
+		Match match = new Match(game.getPlayer1(), game.getPlayer2(), 3); // Important number 3
 		// 1
 		player1.setGesture(Gesture.ROCK);
 		player2.setGesture(Gesture.PAPER);
@@ -66,9 +66,7 @@ public class MatchTest {
 		result = round.play(player1, player2);
 		match.addMatchResult(result);
 
-		
-		
-		boolean actual = match.hasRoundAWinner();
+		boolean actual = match.hasRoundBestOfWinner();
 		boolean expected = true; 
 		
 		Player actual2 = match.getRoundWinner();

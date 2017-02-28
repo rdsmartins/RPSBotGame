@@ -11,17 +11,17 @@ public class Game {
 	
 	public Game() {
 		// assume botPlayer
-		initBotGame();
+		//initBotGame();
 	}
 	
 	public Game(Player player1 , Player player2) {
 		this.player1 = player1;
 		this.player2 = player2;
 	}
-	public void initBotGame() {
-		this.player1 = new BotPlayer("TARS [-]");
-		this.player2 = new Player("You :)");
-	}
+//	public void initBotGame() {
+//		this.player1 = new BotPlayer("TARS [-]");
+//		this.player2 = new Player("You :)");
+//	}
 	
 	public Player getPlayer1() {
 		return player1;
